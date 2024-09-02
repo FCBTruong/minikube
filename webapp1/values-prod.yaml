@@ -1,0 +1,6 @@
+namespace: prod
+
+configmap:
+  name: helmmapconfigmapv1.1
+  data:
+    CUSTOM_HEADER: 'Welcome to my PROD'
