@@ -28,7 +28,7 @@ expose:
       secretName: ""
   ingress:
     hosts:
-      core: "192.168.49.2"
+      core: "192.168.49.2:30002"
     # set to the type of ingress controller if it has specific requirements.
     # leave as `default` for most ingress controllers.
     # set to `gce` if using the GCE ingress controller
