@@ -3,3 +3,5 @@ PORT FORWARD:
 - 8080: Jenkins
 - 8081: Harbor
 - 8082: Argo
+- 9090: Prometheus
+- 3001: Grafana
