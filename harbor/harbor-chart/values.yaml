@@ -8,7 +8,7 @@ expose:
     # Note: if the "expose.type" is "ingress" and TLS is disabled,
     # the port must be included in the command when pulling/pushing images.
     # Refer to https://github.com/goharbor/harbor/issues/5291 for details.
-    enabled: false # Disable TLS for simple local testing
+    enabled: true # Disable TLS for simple local testing
     # The source of the tls certificate. Set as "auto", "secret"
     # or "none" and fill the information in the corresponding section
     # 1) auto: generate the tls certificate automatically
@@ -20,7 +20,7 @@ expose:
     auto:
       # The common name used to generate the certificate, it's necessary
       # when the type isn't "ingress"
-      commonName: ""
+      commonName: "192.168.49.2"
     secret:
       # The name of secret which contains keys named:
       # "tls.crt" - the certificate
@@ -28,7 +28,7 @@ expose:
       secretName: ""
   ingress:
     hosts:
-      core: "192.168.49.2:30002"
+      core: "192.168.49.2:30003"
     # set to the type of ingress controller if it has specific requirements.
     # leave as `default` for most ingress controllers.
     # set to `gce` if using the GCE ingress controller
@@ -109,7 +109,7 @@ expose:
 # the IP address of k8s node
 #
 # If Harbor is deployed behind the proxy, set it as the URL of proxy
-externalURL: http://192.168.49.2:30002
+externalURL: https://192.168.49.2:30003
 
 # The persistence is enabled by default and a default StorageClass
 # is needed in the k8s cluster to provision volumes dynamically.
@@ -481,6 +481,8 @@ containerSecurityContext:
 
 # If service exposed via "ingress", the Nginx will not be used
 nginx:
+  ssl:
+    redirect: false
   image:
     repository: goharbor/nginx-photon
     tag: v2.11.1
@@ -495,7 +497,7 @@ nginx:
   #    memory: 256Mi
   #    cpu: 100m
   extraEnvVars: []
-  nodeSelector: {}
+  nodeSelector: {} 
   tolerations: []
   affinity: {}
   # Spread Pods across failure-domains like regions, availability zones or nodes
